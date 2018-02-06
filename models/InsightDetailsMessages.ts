@@ -145,6 +145,56 @@ export default {
             "purchaseSpendingsAmountTxt": "Your purchases total {{Amount utils.abs(transactions.filter('month',dateUtils.getMonth(currentDate,-1)).filter('currencyCd',localCurrencyCd).sum('amount'))}} for the month of {{utils.monthName(dateUtils.getMonth(currentDate,-1))}}."
         }
     },
+    "BT_ RecommendRDC_D12": {
+        "en": {
+            "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText": "<span class=\"perso-bold\">1 check</span><br>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
+        },
+        "he": {
+            "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText": "1 שיק : {{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}} "
+        }
+    },
+    "BT_ RecommendRDC_D13": {
+        "en": {
+            "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt": "Use your smartphone to deposit checks, and save time on trips to the ATM and your branch.<br>With the same security and protection as Online Banking, you can make check deposits whenever you want from almost anywhere just by using your phone's camera.",
+            "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131834027_txt": "Learn more"
+        },
+        "he": {
+            "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt": "רציתי לספר לך על שירות הפקדת שיקים שקיים באפליקציית הבנק. הפקדת שיקים באפליקציה תחסוך לך לגשת לסניף או למכונה אוטומטית להפקדת שיקים.<br>כל מה שצריך לעשות זה לצלם את השיק ישירות מאפליקציית הבנק והשיק יופקד בקלות ובנוחות. ",
+            "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131834027_txt": "לפרטים נוספים "
+        }
+    },
+    "BT_ RecommendRDC_D11": {
+        "en": {
+            "TXT_D11_B1": "On {{Date confirmedTransaction.date}} a check was deposited to your account."
+        },
+        "he": {
+            "TXT_D11_B1": "בתאריך {{Date confirmedTransaction.date format='DD/MM/yy'}} הפקדת שיק בחשבון. "
+        }
+    },"BT_NotifySalaryDeposit.D11": {
+        "en": {
+            "notifySalaryDepositTxt": "On {{Date confirmedTransaction.date}}, a paycheck of {{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}} was deposited into your account."
+        },
+        "he": {
+            "notifySalaryDepositTxt": "רציתי לעדכן אותך שבתאריך {{Date confirmedTransaction.date format='DD/MM/yy'}} הופקדה משכורת לחשבונך. "
+        }
+    },
+    "BT_NotifySalaryDeposit.D12": {
+        "en": {
+            "accountTmpl": "<span class=\"perso-bold\">1 Paycheck</span><br>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
+        },
+        "he": {
+            "accountTmpl": "סכום משכורת: {{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}} "
+        }
+    },
+    "BT_NotifySalaryDeposit.D13": {
+        "en": {
+            "recentPaycheckTxt": "Recent paycheck deposits:",
+            "labelAmount": "{{Amount utils.abs(amount)}}"
+        },
+        "he": {
+            "recentPaycheckTxt": "להלן פירוט המשכורות האחרונות שהופקדו בחשבון: "
+        }
+    },
     "BT_PurchaseAnalysis.D651": {} ,
     "BT_SumSpendingCategory.D58": {} ,
     "BT_SumSpendingCategory.D571": {} ,

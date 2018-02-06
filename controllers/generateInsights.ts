@@ -137,7 +137,7 @@ const generqateInsightda0 = (id , transactions: any[] , lang) => {
                 direction: "vertical" ,
                 series: [transactions.map(amount => ({
                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-                    value: amount.amount
+                    value: Math.abs(amount.amount)
                 }))] ,
                 categories: transactions.map(amount =>
                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
@@ -167,7 +167,7 @@ const generqateInsightfe0 = (id , transactions , lang) => {
                 direction: "vertical" ,
                 series: [transactions.map((amount: any) => ({
                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-                    value: amount.amount
+                    value: Math.abs(amount.amount)
                 }))] ,
                 categories: transactions.map((amount: any) =>
                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
@@ -293,7 +293,9 @@ export default (id , transactions: any , BankURL , lang) => {
             );
             return length > 1 ? generqateInsight67f(id , transactions , value , length , lang) : null;
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
-            return generqateInsight85c(id , transactions , BankURL , lang);
+            amount = transactions.filter(t => t.type === "DepositCheck" && new Date(t.date).getMonth() === curDate.getMonth() &&
+                (new Date(t.date)).getFullYear() === curDate.getFullYear());
+            return amount.length ? generqateInsight85c(id , amount , BankURL , lang) : null;
         case "0ebf81f1-273a-47b2-ae66-59fc50520da0":
             amount = transactions.filter((t: any) =>
                 t.categoryDescription === "Salary");

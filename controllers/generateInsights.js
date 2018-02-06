@@ -119,7 +119,7 @@ var generqateInsightda0 = function (id, transactions, lang) {
                 direction: "vertical",
                 series: [transactions.map(function (amount) { return ({
                         label: "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
-                        value: amount.amount
+                        value: Math.abs(amount.amount)
                     }); })],
                 categories: transactions.map(function (amount) {
                     return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month - 1];
@@ -141,7 +141,7 @@ var generqateInsightfe0 = function (id, transactions, lang) {
                 direction: "vertical",
                 series: [transactions.map(function (amount) { return ({
                         label: "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
-                        value: amount.amount
+                        value: Math.abs(amount.amount)
                     }); })],
                 categories: transactions.map(function (amount) {
                     return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month - 1];
@@ -223,7 +223,9 @@ exports.default = function (id, transactions, BankURL, lang) {
             });
             return length_1 > 1 ? generqateInsight67f(id, transactions, value, length_1, lang) : null;
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
-            return generqateInsight85c(id, transactions, BankURL, lang);
+            amount = transactions.filter(function (t) { return t.type === "DepositCheck" && new Date(t.date).getMonth() === curDate.getMonth() &&
+                (new Date(t.date)).getFullYear() === curDate.getFullYear(); });
+            return amount.length ? generqateInsight85c(id, amount, BankURL, lang) : null;
         case "0ebf81f1-273a-47b2-ae66-59fc50520da0":
             amount = transactions.filter(function (t) {
                 return t.categoryDescription === "Salary";

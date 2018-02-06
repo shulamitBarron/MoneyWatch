@@ -22,6 +22,17 @@ exports.dialogsForStory = {
         "BT_DuplicateTransactionCharge_D93",
         "BT_DuplicateTransactionCharge_D94"
     ],
+    "RecommendRDC_UC1": [
+        "BT_ RecommendRDC_D11",
+        "BT_ RecommendRDC_D12",
+        "BT_ RecommendRDC_D13"
+    ],
+    "NotifySalaryDeposit_UC4": [
+        "BT_NotifySalaryDeposit.D11",
+        "BT_NotifySalaryDeposit.D12",
+        "BT_NotifySalaryDeposit.D13"
+    ],
+    "NotifyGovernmentDeposit_UC1": [],
     "IntroducePersonetics_UC1": [
         "IntroducePersonetics_D11"
     ],
@@ -130,6 +141,87 @@ exports.blockForDialog = {
             txt: "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D94_block_1488727324976_txt",
             class: "perso-body",
             text: "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D94_block_1488727324976_txt"
+        }
+    ],
+    "BT_ RecommendRDC_D11": [
+        {
+            "type": "txt",
+            "txt": "TXT_D11_B1",
+            "class": "perso-H2",
+            "id": "block_0",
+            "text": "TXT_D11_B1"
+        }
+    ],
+    "BT_ RecommendRDC_D12": [
+        {
+            "id": "block_1491130885876",
+            "type": "account-selector",
+            "options": [
+                {
+                    "type": "data",
+                    "src": "confirmedAccount",
+                    "text": "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText"
+                }
+            ],
+            "src": "confirmedAccount",
+            "var": "selectedAccount",
+            "showAll": false,
+            "accountText": "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText"
+        }
+    ],
+    "BT_ RecommendRDC_D13": [
+        {
+            "id": "block_1491131804369",
+            "type": "txt",
+            "txt": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt",
+            "text": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt"
+        },
+        {
+            "id": "block_1491131834027",
+            "type": "buttons",
+            "buttonType": "navigateTo",
+            "options": [
+                {
+                    "id": "InitiateRDCLink",
+                    "type": "static",
+                    "txt": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131834027_txt"
+                }
+            ]
+        }
+    ],
+    "BT_NotifySalaryDeposit.D11": [
+        {
+            "type": "txt",
+            "txt": "notifySalaryDepositTxt",
+            "class": "perso-H2",
+            "id": "block_0",
+            "text": "notifySalaryDepositTxt"
+        }
+    ],
+    "BT_NotifySalaryDeposit.D12": [
+        {
+            "type": "account-selector",
+            "accountText": "accountTmpl",
+            "src": "accounts.sortBy('number','DESC')",
+            "default": "accounts.max('number').getValue(0,'id')",
+            "showAll": false,
+            "id": "block_0",
+            "var": "selectedAccount"
+        }
+    ],
+    "BT_NotifySalaryDeposit.D13": [
+        {
+            "type": "txt",
+            "txt": "recentPaycheckTxt",
+            "class": "perso-H4",
+            "id": "block_0",
+            "text": "recentPaycheckTxt"
+        },
+        {
+            "type": "tranList",
+            "class": "perso-txlist1",
+            "src": "transactions.sortBy('date','desc')",
+            "id": "block_1"
         }
     ],
     "IntroducePersonetics_D11": [
@@ -690,11 +782,31 @@ exports.blockForDialog = {
 exports.classForDialog = [
     "BT_PurchaseAnalysis.D631-b",
     "BT_PurchaseAnalysis.D62",
+    "BT_ RecommendRDC_D12",
+    "BT_NotifySalaryDeposit.D12"
 ];
 exports.tablesForStory = {
     "DuplicateTransactionCharge_UC9": [
         "confirmedTransaction",
         "count",
+        "currentDate",
+        "accounts",
+        "transactions"
+    ],
+    "RecommendRDC_UC1": [
+        "confirmedTransaction",
+        "confirmedAccount",
+        "seriesNames",
+        "periods",
+        "currentDate",
+        "accounts",
+        "transactions"
+    ],
+    "NotifySalaryDeposit_UC4": [
+        "confirmedTransaction",
+        "confirmedAccount",
+        "seriesNames",
+        "periods",
         "currentDate",
         "accounts",
         "transactions"
