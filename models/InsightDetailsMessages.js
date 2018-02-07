@@ -123,15 +123,34 @@ exports.default = {
             "topSpendingTxt": "Let's review your top spending categories in {{Date selectedMonth format='m'}}:"
         }
     },
+    "BT_RevenueAnalysis.D641": {
+        "en": {
+            "centerText": "{{Amount utils.abs(transactions.filter('account',selectedAccount.id).filter('month',selectedMonth).sum('amount'))}}<br>Total",
+            "label": "{{Amount amount}}",
+            "topSpendingTxt": "Let's review your top revenue categories in {{Date selectedMonth format='m'}}:"
+        }
+    },
     "BT_PurchaseAnalysis.D631": {
         "en": {
             "monthlyPurchasesTxt": "Let's review your monthly purchases on {{accounts.filter('id',selectedAccount.id).getValue(0,'number')}}",
             "chartLabel": "{{Amount -1*amount}}"
         }
     },
+    "BT_RevenueAnalysis.D631": {
+        "en": {
+            "monthlyPurchasesTxt": "Let's review your monthly revenue",
+            "chartLabel": "{{Amount amount}}"
+        }
+    },
     "BT_PurchaseAnalysis.D62": {
         "en": {
             "accountTmpl": "{{Amount utils.abs(transactions.filter('account',id).filter('month',dateUtils.getMonth(currentDate,-1)).sum('amount'))}}<br><span class='perso-bold'>Total purchases</span>"
+        }
+    },
+    "BT_RevenueAnalysis.D62": {
+        "en": {
+            "accountTmpl": "{{Amount utils.abs(transactions.filter('account',id).filter('month',dateUtils.getMonth(currentDate,-1)).sum('amount'))}}<br><span class='perso-bold'>Total revenue</span>",
+            "AllaccountTmpl": "{{Amount utils.abs(transactions.filter('month',dateUtils.getMonth(currentDate,-1)).sum('amount'))}}<br><span class='perso-bold'>Total revenue</span>"
         }
     },
     "BT_PurchaseAnalysis.D631-b": {
@@ -141,10 +160,23 @@ exports.default = {
             "selectedMonthSumTxt": "{{Date selectedMonth format='M'}} purchases"
         }
     },
+    "BT_RevenueAnalysis.D631-b": {
+        "en": {
+            "monthAvgTxt": "Avg. monthly revenue",
+            "percentTxt": "Change from avg.",
+            "selectedMonthSumTxt": "{{Date selectedMonth format='M'}} revenue"
+        }
+    },
     "BT_PurchaseAnalysis.D61": {
         "en": {
             "noteTxt": "That's right in line with your average monthly amount of {{Amount -1*transactions.filter('currencyCd',localCurrencyCd).sum('amount')/periods.size() format='###,###,###'}}.",
             "purchaseSpendingsAmountTxt": "Your purchases total {{Amount utils.abs(transactions.filter('month',dateUtils.getMonth(currentDate,-1)).filter('currencyCd',localCurrencyCd).sum('amount'))}} for the month of {{utils.monthName(dateUtils.getMonth(currentDate,-1))}}."
+        }
+    },
+    "BT_RevenueAnalysis.D61": {
+        "en": {
+            "noteTxt": "That's right in line with your average monthly amount of {{Amount transactions.filter('currencyCd',localCurrencyCd).sum('amount')/periods.size() format='###,###,###'}}.",
+            "purchaseSpendingsAmountTxt": "Your revenue total {{Amount utils.abs(transactions.filter('month',dateUtils.getMonth(currentDate,-1)).filter('currencyCd',localCurrencyCd).sum('amount'))}} for the month of {{utils.monthName(dateUtils.getMonth(currentDate,-1))}}."
         }
     },
     "BT_ RecommendRDC_D12": {
@@ -182,10 +214,10 @@ exports.default = {
     },
     "BT_NotifySalaryDeposit.D12": {
         "en": {
-            "accountTmpl": "<span class=\"perso-bold\">1 Paycheck</span>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
+            "accountTmpl": "<span class=\"perso-bold\">1 Paycheck</span>{{Amount utils.abs(transactions.filter('account',id).sum('amount'))}}"
         },
         "he": {
-            "accountTmpl": "סכום משכורת: {{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}} "
+            "accountTmpl": "סכום משכורת: {{Amount utils.abs(transactions.filter('account',id).sum('amount'))}} "
         }
     },
     "BT_NotifySalaryDeposit.D13": {

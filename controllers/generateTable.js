@@ -46,7 +46,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods) 
             table.rows = seriesNames;
             break;
         case "lastMonthDate":
-            table.rows = [[(new Date().getMonth() + 1).toString()]];
+            table.rows = [[(new Date((new Date).setMonth(curDate.getMonth() - 1)).getMonth() + 1).toString()]];
             break;
         case "hasSingleAccount":
             table.rows = [[(accounts.length === 1).toString()]];
@@ -76,7 +76,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods) 
                 theTransactions[0].currencyCd]) : null; }); });
             break;
         case "periods":
-            table.rows = [periods];
+            table.rows = periods.map(function (p) { return [p]; });
             break;
         default:
             break;

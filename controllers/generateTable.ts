@@ -33,7 +33,7 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
             table.rows = seriesNames;
             break;
         case "lastMonthDate":
-            table.rows = [[(new Date().getMonth() + 1).toString()]];
+            table.rows = [[(new Date((new Date).setMonth(curDate.getMonth() - 1)).getMonth() + 1).toString()]];
             break;
         case "hasSingleAccount":
             table.rows = [[(accounts.length === 1).toString()]];
@@ -62,7 +62,7 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
                 theTransactions[0].currencyCd]) : null))
             break;
         case "periods":
-            table.rows = [periods];
+            table.rows = periods.map(p=> [p]);
             break;
         default:
             break;

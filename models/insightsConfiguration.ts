@@ -33,8 +33,8 @@ export const dialogsForStory = {
     ] ,
     "NotifyGovernmentDeposit_UC1" :[
         "BT_NotifySalaryDeposit.D11" ,
-        "BT_NotifySalaryDeposit.D12" ,
-        "BT_NotifySalaryDeposit.D13"
+        "BT_NotifySalaryDeposit.D13",
+        "BT_NotifySalaryDeposit.D12"
     ],
     "IntroducePersonetics_UC1": [
         "IntroducePersonetics_D11"
@@ -74,12 +74,12 @@ export const dialogsForStory = {
         "BT_PurchaseAnalysis.D651"
     ] ,
     "RevenueAnalysis_UC6": [
-        "BT_PurchaseAnalysis.D61" ,
-        "BT_PurchaseAnalysis.D62" ,
-        "BT_PurchaseAnalysis.D631" ,
-        "BT_PurchaseAnalysis.D631-b" ,
-        "BT_PurchaseAnalysis.D641" ,
-        "BT_PurchaseAnalysis.D651"
+        "BT_RevenueAnalysis.D61" ,
+        "BT_RevenueAnalysis.D62" ,
+        "BT_RevenueAnalysis.D631" ,
+        "BT_RevenueAnalysis.D631-b" ,
+        "BT_RevenueAnalysis.D641" ,
+        "BT_RevenueAnalysis.D651"
     ] ,
     "SumSpendingCategory_UC3": [
         "BT_SumSpendingCategory.D58" ,
@@ -559,6 +559,20 @@ export const blockForDialog = {
             "id": "block_1" ,
         }
     ] ,
+    "BT_RevenueAnalysis.D61": [
+        {
+            "type": "txt" ,
+            "txt": "purchaseSpendingsAmountTxt" ,
+            "class": "perso-H2" ,
+            "id": "block_0" ,
+        } ,
+        {
+            "type": "txt" ,
+            "txt": "noteTxt" ,
+            "class": "perso-body" ,
+            "id": "block_1" ,
+        }
+    ] ,
     "BT_PurchaseAnalysis.D62": [
         {
             "type": "account-selector" ,
@@ -567,6 +581,18 @@ export const blockForDialog = {
             "src": "utils.join(accounts,transactions.filter('month',dateUtils.getMonth(currentDate,-1)).groupBy('account','amount'),'accounts.id==transactions.account','LEFT').abs('amount').sortBy('amount','desc')" ,
             "default": "utils.join(accounts,transactions.filter('month',dateUtils.getMonth(currentDate,-1)).groupBy('account','amount'),'accounts.id==transactions.account','LEFT').abs('amount').sortBy('amount','desc').getValue(0,'id')" ,
             "showAll": false ,
+            "id": "block_0"
+        }
+    ] ,
+    "BT_RevenueAnalysis.D62": [
+        {
+            "type": "account-selector" ,
+            "accountText": "accountTmpl" ,
+            allAccountsText:"AllaccountTmpl" ,
+            "var": "selectedAccount" ,
+            "src": "utils.join(accounts,transactions.filter('month',dateUtils.getMonth(currentDate,-1)).groupBy('account','amount'),'accounts.id==transactions.account','LEFT').abs('amount').sortBy('amount','desc')" ,
+            "default": "utils.join(accounts,transactions.filter('month',dateUtils.getMonth(currentDate,-1)).groupBy('account','amount'),'accounts.id==transactions.account','LEFT').abs('amount').sortBy('amount','desc').getValue(0,'id')" ,
+            "showAll": true ,
             "id": "block_0"
         }
     ] ,
@@ -591,6 +617,27 @@ export const blockForDialog = {
             "id": "block_1"
         }
     ] ,
+    "BT_RevenueAnalysis.D631": [
+        {
+            "type": "txt" ,
+            "txt": "monthlyPurchasesTxt" ,
+            "class": "perso-H4" ,
+            "id": "block_0"
+        } ,
+        {
+            "type": "bar-chart" ,
+            "direction": "vertical" ,
+            "var": "selectedMonth" ,
+            "varSource": "month" ,
+            "categories": "periods.sortByMonth('month','asc')" ,
+            "x": "utils.monthName(month,'MMM')" ,
+            "y": "amount" ,
+            "label": "chartLabel" ,
+            "src": "transactions.filter('account',selectedAccount.id).groupBy('month','amount').sortByMonth('month', 'asc')" ,
+            "default": "transactions.filter('account',selectedAccount.id).groupBy('month','amount').sortByMonth('month', 'desc').first('month')" ,
+            "id": "block_1"
+        }
+    ] ,
     "BT_PurchaseAnalysis.D631-b": [
         {
             "type": "textboxes" ,
@@ -601,6 +648,26 @@ export const blockForDialog = {
                 } ,
                 {
                     "value": "Amount -1*transactions.filter('account',selectedAccount.id).filter('month',selectedMonth).sum('amount') format='###,###,###'" ,
+                    "label": "selectedMonthSumTxt"
+                } ,
+                {
+                    "value": "utils.formatPercent((utils.round(transactions.filter('account',selectedAccount.id).filter('month',selectedMonth).sum('amount'))-utils.round(transactions.filter('account',selectedAccount.id).sum('amount')/periods.size()))/utils.round(transactions.filter('account',selectedAccount.id).sum('amount')/periods.size()+.01))" ,
+                    "label": "percentTxt"
+                }
+            ] ,
+            "id": "block_0" ,
+        }
+    ] ,
+    "BT_RevenueAnalysis.D631-b": [
+        {
+            "type": "textboxes" ,
+            "boxes": [
+                {
+                    "value": "Amount transactions.filter('account',selectedAccount.id).sum('amount')/periods.size() format='###,###,###'" ,
+                    "label": "monthAvgTxt"
+                } ,
+                {
+                    "value": "Amount transactions.filter('account',selectedAccount.id).filter('month',selectedMonth).sum('amount') format='###,###,###'" ,
                     "label": "selectedMonthSumTxt"
                 } ,
                 {
@@ -631,7 +698,35 @@ export const blockForDialog = {
             "id": "block_1"
         }
     ] ,
+    "BT_RevenueAnalysis.D641": [
+        {
+            "type": "txt" ,
+            "txt": "topSpendingTxt" ,
+            "class": "perso-H4" ,
+            "id": "block_0"
+        } ,
+        {
+            "type": "pie-chart" ,
+            "var": "selectedCategory" ,
+            "varSource": "categoryGroup" ,
+            "sliceName": "categoryGroup" ,
+            "sliceValue": "amount" ,
+            "label": "label" ,
+            "centerText": "centerText" ,
+            "src": "transactions.filter('account',selectedAccount.id).filter('month', selectedMonth).groupBy('categoryGroup','amount').sortBy('amount','asc')" ,
+            "default": "transactions.filter('account',selectedAccount.id).filter('month',selectedMonth).groupBy('categoryGroup','amount').abs('amount').sortBy('amount','desc').getValue(0,'categoryGroup')" ,
+            "id": "block_1"
+        }
+    ] ,
     "BT_PurchaseAnalysis.D651": [
+        {
+            "type": "tranList" ,
+            "class": "perso-txlist1" ,
+            "src": "transactions.filter('account', selectedAccount.id).filter('month', selectedMonth).filter('categoryGroup', selectedCategory)" ,
+            "id": "block_0"
+        }
+    ] ,
+    "BT_RevenueAnalysis.D651": [
         {
             "type": "tranList" ,
             "class": "perso-txlist1" ,

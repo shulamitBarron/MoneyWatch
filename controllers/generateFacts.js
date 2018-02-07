@@ -21,7 +21,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
     var curDate = new Date();
     var facts = {};
     var periods = [];
-    for (var i = 0; i < 4; i++) {
+    for (var i = 1; i < 5; i++) {
         periods.push((new Date((new Date).setMonth(curDate.getMonth() - i)).getMonth() + 1).toString());
     }
     switch (storyId) {
@@ -65,20 +65,34 @@ exports.generateFacts = function (storyId, transactions, accounts) {
             });
             break;
         case "6b739292-bb50-4284-9d66-342de48403f2":
-            theTransactions = transactions.filter(function (t) { return t.Mode === "Out" && periods.indexOf(t.month.toString()) > -1; });
-            insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
-                return facts[table] = generateTable_1.default(table, theTransactions, accounts.filter(function (account) {
-                    return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
-                }), [["In"], ["Out"]], periods);
+            theTransactions = transactions.filter(function (t) {
+                return t.Mode === "Out" && periods.indexOf(t.month.toString()) > -1;
             });
+            theAccounts = accounts.filter(function (account) {
+                return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
+            });
+            if (theTransactions.length && theAccounts.length) {
+                insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
+                    return facts[table] = generateTable_1.default(table, theTransactions, theAccounts, [["In"], ["Out"]], periods);
+                });
+            }
+            else {
+                throw "error";
+            }
             break;
         case "6b739292-bb50-4284-9d66-342de48403f2-b":
             theTransactions = transactions.filter(function (t) { return t.Mode === "In" && periods.indexOf(t.month.toString()) > -1; });
-            insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
-                return facts[table] = generateTable_1.default(table, theTransactions, accounts.filter(function (account) {
-                    return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
-                }), [["In"], ["Out"]], periods);
+            theAccounts = accounts.filter(function (account) {
+                return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
             });
+            if (theTransactions.length && theAccounts.length) {
+                insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
+                    return facts[table] = generateTable_1.default(table, theTransactions, theAccounts, [["In"], ["Out"]], periods);
+                });
+            }
+            else {
+                throw "error";
+            }
             break;
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
             theTransactions = transactions.filter(function (t) {

@@ -91,7 +91,7 @@ export const getInsights = (req , res) => {
                         const BankInsights = mongoRes[0].insights;
                         const transactions = req.body.transactions;
                         BankInsights.forEach((BankInsight) => {
-                            const insight = generator(BankInsight , transactions , mongoRes[0].BankURL , language);
+                            const insight = generator(BankInsight , transactions, language);
                             if (insight != null)
                                 UserInsights.push(insight);
                         });

@@ -94,7 +94,7 @@ exports.getInsights = function (req, res) {
                         var BankInsights = mongoRes[0].insights;
                         var transactions_1 = req.body.transactions;
                         BankInsights.forEach(function (BankInsight) {
-                            var insight = generateInsights_1.default(BankInsight, transactions_1, mongoRes[0].BankURL, language_1);
+                            var insight = generateInsights_1.default(BankInsight, transactions_1, language_1);
                             if (insight != null)
                                 UserInsights_1.push(insight);
                         });

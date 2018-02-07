@@ -25,7 +25,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
     const curDate = new Date();
     const facts = {};
     const periods = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 1; i < 5; i++) {
         periods.push((new Date((new Date).setMonth(curDate.getMonth() - i)).getMonth() + 1).toString())
     }
     switch (storyId) {
@@ -63,16 +63,27 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
                 facts[table] = generateTble(table , transactions , accounts));
             break;
         case "6b739292-bb50-4284-9d66-342de48403f2":
-            theTransactions = transactions.filter(t => t.Mode === "Out" && periods.indexOf(t.month.toString()) > -1);
-            tablesForStory[storyIdForInsightId[storyId]].map(table =>
-                facts[table] = generateTble(table , theTransactions , accounts.filter(account =>
-                    theTransactions.filter(t => t.accountNumber === account.number).length > 0) , [["In"] , ["Out"]] , periods));
+            theTransactions = transactions.filter(t =>
+                t.Mode === "Out" && periods.indexOf(t.month.toString()) > -1);
+            theAccounts = accounts.filter(account =>
+                theTransactions.filter(t => t.accountNumber === account.number).length > 0);
+            if (theTransactions.length && theAccounts.length) {
+                tablesForStory[storyIdForInsightId[storyId]].map(table =>
+                    facts[table] = generateTble(table , theTransactions , theAccounts , [["In"] , ["Out"]] , periods));
+            } else {
+                throw "error";
+            }
             break;
         case "6b739292-bb50-4284-9d66-342de48403f2-b":
             theTransactions = transactions.filter(t => t.Mode === "In" && periods.indexOf(t.month.toString()) > -1);
-            tablesForStory[storyIdForInsightId[storyId]].map(table =>
-                facts[table] = generateTble(table , theTransactions , accounts.filter(account =>
-                    theTransactions.filter(t => t.accountNumber === account.number).length > 0) , [["In"] , ["Out"]] , periods));
+            theAccounts = accounts.filter(account =>
+                theTransactions.filter(t => t.accountNumber === account.number).length > 0);
+            if (theTransactions.length && theAccounts.length) {
+                tablesForStory[storyIdForInsightId[storyId]].map(table =>
+                    facts[table] = generateTble(table , theTransactions , theAccounts , [["In"] , ["Out"]] , periods));
+            } else {
+                throw "error";
+            }
             break;
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
             theTransactions = transactions.filter(t =>
