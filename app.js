@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var bodyParser = require("body-parser");
 var getInsights_1 = require("./controllers/getInsights");
@@ -8,10 +8,10 @@ var port = process.env.PORT || 8090;
 
 function errorHandler(err, req, res, next) {
     res.status(500);
-    res.render('error', {error: err});
+    res.render('error', { error: err });
 }
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(errorHandler);
 app.listen(port, function (err) {

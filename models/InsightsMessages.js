@@ -10,7 +10,8 @@ exports.default = {
         },
         "66b719da-5a83-433b-bd82-c8ed2ca1685c": {
             "title": "הפקדת שיק בסלולר",
-            "teaser-text": "באפשרותך לחסוך זמן ולהפקיד שיקים באפליקציה!"
+            "teaser-text": "באפשרותך לחסוך זמן ולהפקיד שיקים באפליקציה!",
+            "main-image": "https://www.bankhapoalim.co.il/wps/wcm/connect/51ccfc804428c2e1a738bfef2e2911d8/Kedai_ladaat_app_nihulheshvon_01_0000_1.jpg?MOD=AJPERES&lmod=493859898&CACHEID=51ccfc804428c2e1a738bfef2e2911d8"
         },
         "0ebf81f1-273a-47b2-ae66-59fc50520da0": {
             "title": "משכורת בחשבון",
@@ -51,7 +52,8 @@ exports.default = {
         },
         "66b719da-5a83-433b-bd82-c8ed2ca1685c": {
             "title": "Depositing a check with a cell phone",
-            "teaser-text": "You can save time and place checks in the app!"
+            "teaser-text": "You can save time and place checks in the app!",
+            "main-image": "https://www.bankhapoalim.co.il/wps/wcm/connect/51ccfc804428c2e1a738bfef2e2911d8/Kedai_ladaat_app_nihulheshvon_01_0000_1.jpg?MOD=AJPERES&lmod=493859898&CACHEID=51ccfc804428c2e1a738bfef2e2911d8"
         },
         "0ebf81f1-273a-47b2-ae66-59fc50520da0": {
             "title": "Salary in Account",
@@ -92,7 +94,8 @@ exports.default = {
         },
         "66b719da-5a83-433b-bd82-c8ed2ca1685c": {
             "title": "إيداع شيك مع هاتف خلوي",
-            "teaser-text": "يمكنك حفظ الوقت والمكان الشيكات في التطبيق!"
+            "teaser-text": "يمكنك حفظ الوقت والمكان الشيكات في التطبيق!",
+            "main-image": "https://www.bankhapoalim.co.il/wps/wcm/connect/51ccfc804428c2e1a738bfef2e2911d8/Kedai_ladaat_app_nihulheshvon_01_0000_1.jpg?MOD=AJPERES&lmod=493859898&CACHEID=51ccfc804428c2e1a738bfef2e2911d8"
         },
         "0ebf81f1-273a-47b2-ae66-59fc50520da0": {
             "title": "سالاري إن أكونت",
@@ -114,7 +117,8 @@ exports.default = {
         },
         "66b719da-5a83-433b-bd82-c8ed2ca1685c": {
             "title": "Dépôt d'un chèque avec un téléphone portable",
-            "teaser-text": "Vous pouvez gagner du temps et placer des contrôles dans l'application!"
+            "teaser-text": "Vous pouvez gagner du temps et placer des contrôles dans l'application!",
+            "main-image": "https://www.bankhapoalim.co.il/wps/wcm/connect/51ccfc804428c2e1a738bfef2e2911d8/Kedai_ladaat_app_nihulheshvon_01_0000_1.jpg?MOD=AJPERES&lmod=493859898&CACHEID=51ccfc804428c2e1a738bfef2e2911d8"
         },
         "0ebf81f1-273a-47b2-ae66-59fc50520da0": {
             "title": "Salaire en compte",

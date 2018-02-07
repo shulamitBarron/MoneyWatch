@@ -10,10 +10,10 @@ export default {
     "BT_DuplicateTransactionCharge_D92": {
         "en": {
             "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D92_block_1488726659304_accountSelectorAllAccountsText": "<span class=\"perso-bold\">{{count}}  similar charge(s)</span><br>{{Amount confirmedTransaction.amount format='###,###,###.00'}}" ,
-            "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D92_block_1488726659304_accountSelectorAccountText": "<span class=\"perso-bold\">{{transactions.filter('account',id).groupBy('id').size()}} charge(s)</span><br>{{Amount confirmedTransaction.amount format='###,###,###.00'}}"
+            "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D92_block_1488726659304_accountSelectorAccountText": "<span class=\"perso-bold\">{{transactions.filter('account',id).groupBy('id').size()}} charge(s)</span>{{Amount confirmedTransaction.amount format='###,###,###.00'}}"
         } ,
         "he": {
-            "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D92_block_1488726659304_accountSelectorAllAccountsText": "<span class=\"perso-bold\">{{count}} חיוב/ים זהים </span><br>{{Amount confirmedTransaction.amount format='###,###,###.00'}} כל חיוב " ,
+            "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D92_block_1488726659304_accountSelectorAllAccountsText": "<span class=\"perso-bold\">{{count}} חיוב/ים זהים </span>{{Amount confirmedTransaction.amount format='###,###,###.00'}} כל חיוב " ,
             "DuplicateTransactionCharge_UC9_BT_DuplicateTransactionCharge_D92_block_1488726659304_accountSelectorAccountText": "{{transactions.filter('account',id).groupBy('id').size()}} חיוב/ים זהים כל חיוב {{Amount confirmedTransaction.amount format='###,###,###.00'}}"
         }
     } ,
@@ -147,7 +147,7 @@ export default {
     },
     "BT_ RecommendRDC_D12": {
         "en": {
-            "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText": "<span class=\"perso-bold\">1 check</span><br>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
+            "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText": "<span class=\"perso-bold\">1 check</span>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
         },
         "he": {
             "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText": "1 שיק : {{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}} "
@@ -180,7 +180,7 @@ export default {
     },
     "BT_NotifySalaryDeposit.D12": {
         "en": {
-            "accountTmpl": "<span class=\"perso-bold\">1 Paycheck</span><br>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
+            "accountTmpl": "<span class=\"perso-bold\">1 Paycheck</span>{{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}}"
         },
         "he": {
             "accountTmpl": "סכום משכורת: {{Amount utils.abs(confirmedTransaction.amount) format='###,###,###.00'}} "

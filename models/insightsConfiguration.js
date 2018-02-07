@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.storyIdForInsightId = {
     "72154aa7-d6b9-4f8e-b40d-a292cd0c167f": "DuplicateTransactionCharge_UC9",
     "66b719da-5a83-433b-bd82-c8ed2ca1685c": "RecommendRDC_UC1",
-    "0ebf81f1-273a-47b2-ae66-59fc50520da0": "NotifySalaryDeposit_UC4",
+    "0ebf81f1-273a-47b2-ae66-59fc50520da0": "NotifySalaryDeposit_UC1",
     "16052c32-574b-4a15-882e-0286e4d64fe0": "NotifyGovernmentDeposit_UC1",
     "147443c7-7be1-4f68-8ff3-ce65e992c22c": "IntroducePersonetics_UC1",
     "40c6377e-888c-4e10-8647-4f4eed2ccea7": "SumSpendingMerchant_UC3",
@@ -27,12 +27,16 @@ exports.dialogsForStory = {
         "BT_ RecommendRDC_D12",
         "BT_ RecommendRDC_D13"
     ],
-    "NotifySalaryDeposit_UC4": [
+    "NotifySalaryDeposit_UC1": [
         "BT_NotifySalaryDeposit.D11",
         "BT_NotifySalaryDeposit.D12",
         "BT_NotifySalaryDeposit.D13"
     ],
-    "NotifyGovernmentDeposit_UC1": [],
+    "NotifyGovernmentDeposit_UC1": [
+        "BT_NotifySalaryDeposit.D11",
+        "BT_NotifySalaryDeposit.D12",
+        "BT_NotifySalaryDeposit.D13"
+    ],
     "IntroducePersonetics_UC1": [
         "IntroducePersonetics_D11"
     ],
@@ -175,18 +179,6 @@ exports.blockForDialog = {
             "type": "txt",
             "txt": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt",
             "text": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt"
-        },
-        {
-            "id": "block_1491131834027",
-            "type": "buttons",
-            "buttonType": "navigateTo",
-            "options": [
-                {
-                    "id": "InitiateRDCLink",
-                    "type": "static",
-                    "txt": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131834027_txt"
-                }
-            ]
         }
     ],
     "BT_NotifySalaryDeposit.D11": [
@@ -787,6 +779,7 @@ exports.classForDialog = [
 ];
 exports.tablesForStory = {
     "DuplicateTransactionCharge_UC9": [
+        "hasSingleAccount",
         "confirmedTransaction",
         "count",
         "currentDate",
@@ -802,14 +795,25 @@ exports.tablesForStory = {
         "accounts",
         "transactions"
     ],
-    "NotifySalaryDeposit_UC4": [
+    "NotifySalaryDeposit_UC1": [
         "confirmedTransaction",
-        "confirmedAccount",
         "seriesNames",
         "periods",
+        "count",
         "currentDate",
         "accounts",
-        "transactions"
+        "transactions",
+        "hasSingleAccount"
+    ],
+    "NotifyGovernmentDeposit_UC1": [
+        "confirmedTransaction",
+        "seriesNames",
+        "periods",
+        "count",
+        "currentDate",
+        "accounts",
+        "transactions",
+        "hasSingleAccount"
     ],
     "IntroducePersonetics_UC1": [
         "currentDate"

@@ -2,13 +2,13 @@ import tables from '../models/Tables';
 import {groupBy} from "./common";
 
 export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seriesNames = [] , periods = []) => {
-    let table = tables[t];
+    let table = {...tables[t]};
     let maxDate;
     const curDate = new Date();
     switch (table.case) {
         case "transaction":
             maxDate = new Date(Math.max.apply(null , theTransactions.map(t => new Date(t.date))));
-            const transaction = theTransactions.filter(t => new Date(t.date).getDate() === maxDate.getDate());
+            const transaction = theTransactions.filter(t => new Date(t.date).getTime() === maxDate.getTime());
             table.rows = [table.cols.map(col => transaction[0] && transaction[0][col] ? transaction[0][col] : null)];
             break;
         case "transactions":
@@ -25,8 +25,8 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
             break;
         case "account":
             maxDate = new Date(Math.max.apply(null , theTransactions.map(t => new Date(t.date))));
-            const trans = theTransactions.filter(t=>new Date(t.date).getDate()===maxDate.getDate());
-            const account = trans.length ?accounts.filter(a=> a.number === trans[0].accountNumber): null;
+            const trans = theTransactions.filter(t => new Date(t.date).getTime() === maxDate.getTime());
+            const account = trans.length ? accounts.filter(a => a.number === trans[0].accountNumber) : null;
             table.rows = [table.cols.map(col => account[0] && account[0][col] ? account[0][col] : null)];
             break;
         case "seriesNames":

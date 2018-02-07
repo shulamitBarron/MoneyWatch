@@ -40,11 +40,6 @@ var teaserBlocks = function (id, lang, curDate) {
             alt: "-"
         },
         {
-            blockId: "date",
-            type: "date-box",
-            date: curDate
-        },
-        {
             blockId: "title",
             type: "txt",
             text: InsightsMessages_1.default[lang][id]["title"]
@@ -74,7 +69,7 @@ var generqateInsights = function (id) {
 var generqateInsight67f = function (id, transactions, value, length, lang) {
     var curDate = new Date();
     var teaser = teaserBlocks(id, lang, curDate);
-    teaser[3].text = teaser[3].text.replace("{{transaction}}", value.transaction);
+    teaser[2].text = teaser[2].text.replace("{{transaction}}", value.transaction);
     return __assign({}, generqateInsights(id), { teaserTemplate: "doubleBox", teaserBlocks: teaser.concat([
             {
                 blockId: "box-label1",
@@ -98,13 +93,13 @@ var generqateInsight67f = function (id, transactions, value, length, lang) {
             }
         ]), score: 26.0, category1: "", category2: "", category3: "" });
 };
-var generqateInsight85c = function (id, transactions, BankURL, lang) {
+var generqateInsight85c = function (id, transactions, lang) {
     var curDate = new Date();
     return __assign({}, generqateInsights(id), { teaserTemplate: "image", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 blockId: "main-image",
                 type: "image",
-                url: BankURL,
+                url: InsightsMessages_1.default[lang][id]["main-image"],
                 alt: "Mobile Banking"
             }
         ]), score: 26.0, category1: "Information", category2: "Spending", category3: "money_in" });
@@ -118,16 +113,18 @@ var generqateInsightda0 = function (id, transactions, lang) {
                 class: "teaser-body",
                 direction: "vertical",
                 series: [transactions.map(function (amount) { return ({
-                        label: "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
+                        label: "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
                         value: Math.abs(amount.amount)
                     }); })],
                 categories: transactions.map(function (amount) {
-                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month - 1];
+                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month];
                 }),
                 accessibilityCategories: transactions.map(function (amount) {
-                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month + 1];
+                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month];
                 }),
-                seriesLabels: transactions.map(function (amount) { return "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); })
+                seriesLabels: transactions.map(function (amount) { return "" + (InsightsMessages_1.default[lang][id]["sign"] +
+                    Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); })
             }
         ]), score: 15.0, category1: "", category2: "", category3: "" });
 };
@@ -140,16 +137,18 @@ var generqateInsightfe0 = function (id, transactions, lang) {
                 class: "teaser-body",
                 direction: "vertical",
                 series: [transactions.map(function (amount) { return ({
-                        label: "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
+                        label: "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
                         value: Math.abs(amount.amount)
                     }); })],
                 categories: transactions.map(function (amount) {
-                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month - 1];
+                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month];
                 }),
                 accessibilityCategories: transactions.map(function (amount) {
-                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month + 1];
+                    return new Date(amount.date).getDate() + " " + month_1.default[lang][+amount.month];
                 }),
-                seriesLabels: transactions.map(function (amount) { return "" + (InsightsMessages_1.default[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); })
+                seriesLabels: transactions.map(function (amount) { return "" + (InsightsMessages_1.default[lang][id]["sign"] +
+                    Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); })
             }
         ]), score: 13, category1: "", category2: "", category3: "" });
 };
@@ -167,7 +166,7 @@ var generqateInsight22c = function (id, transactions, lang) {
 var generqateInsight372 = function (id, transactions, lang) {
     var curDate = new Date();
     var teaser = teaserBlocks(id, lang, curDate);
-    teaser[3].text = teaser[3].text.replace("{{month}}", month_1.default[lang][curDate.getMonth()]);
+    teaser[2].text = teaser[2].text.replace("{{month}}", month_1.default[lang][curDate.getMonth()]);
     return __assign({}, generqateInsights(id), { teaserTemplate: "horizontalBar", teaserBlocks: teaser.concat([
             {
                 blockId: "chart",
@@ -205,10 +204,13 @@ var generqateInsight3f2B = function (id, sortedFilterTransactions, lang) {
     var curDate = new Date();
     return __assign({}, generqateInsights(id), { teaserTemplate: "pie", teaserBlocks: teaserBlocks(id, lang, curDate).concat(generateCategory(sortedFilterTransactions)), score: 3, category1: "spend_decrease" });
 };
-exports.default = function (id, transactions, BankURL, lang) {
+exports.default = function (id, transactions, lang) {
     var amount;
     var curDate = new Date();
     var prevDate = new Date((new Date).setMonth(curDate.getMonth() - 1));
+    transactions = transactions.map(function (t) {
+        return (__assign({}, t, { date: new Date(t.date), month: (new Date(t.date).getMonth()).toString(), mode: t.Mode }));
+    });
     switch (id) {
         case "72154aa7-d6b9-4f8e-b40d-a292cd0c167f":
             amount = transactions.filter(function (t) { return t.Mode === "Out"; });
@@ -217,29 +219,52 @@ exports.default = function (id, transactions, BankURL, lang) {
                 return (length_1 = amount.filter(function (a, i) {
                     return i !== idx && a.amount == item.amount && a.transaction === item.transaction &&
                         (new Date(a.date)).getTime() === (new Date(item.date)).getTime() &&
-                        (new Date(a.date)).getMonth() === curDate.getMonth() &&
-                        (new Date(a.date)).getFullYear() === curDate.getFullYear();
+                        Math.ceil(Math.abs(new Date().getTime() -
+                            new Date(a.date).getTime()) / (1000 * 3600 * 24)) <= 2;
                 }).length + 1) > 1;
             });
             return length_1 > 1 ? generqateInsight67f(id, transactions, value, length_1, lang) : null;
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
-            amount = transactions.filter(function (t) { return t.type === "DepositCheck" && new Date(t.date).getMonth() === curDate.getMonth() &&
-                (new Date(t.date)).getFullYear() === curDate.getFullYear(); });
-            return amount.length ? generqateInsight85c(id, amount, BankURL, lang) : null;
+            amount = transactions.filter(function (t) {
+                return t.type === "DepositCheck" && t.Mode === "In" &&
+                    Math.ceil(Math.abs(new Date().getTime() -
+                        new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2;
+            });
+            return amount.length ? generqateInsight85c(id, amount, lang) : null;
         case "0ebf81f1-273a-47b2-ae66-59fc50520da0":
             amount = transactions.filter(function (t) {
-                return t.categoryDescription === "Salary";
+                var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
+                var curYear, curMonth = curDate.getMonth() + 1;
+                if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
+                    curMonth += (curYear - usrYear) * 12;
+                }
+                var diffMonths = curMonth - usrMonth;
+                if (new Date(t.date).getDate() > curDate.getDate())
+                    diffMonths--;
+                return t.categoryDescription === "Salary" && t.Mode === "In" && diffMonths < 12;
             });
+            amount = amount.sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); }).slice(0, 5).reverse();
             return amount.find(function (t) {
-                return (new Date(t.date)).getMonth() === curDate.getMonth() &&
-                    (new Date(t.date)).getFullYear() === curDate.getFullYear();
+                return Math.ceil(Math.abs(new Date().getTime() -
+                    new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2;
             }) ?
                 generqateInsightda0(id, amount, lang) : null;
         case "16052c32-574b-4a15-882e-0286e4d64fe0":
-            amount = transactions.filter(function (t) { return t.Mode === "In" && t.categoryDescription === "Government"; });
+            amount = transactions.filter(function (t) {
+                var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
+                var curYear, curMonth = curDate.getMonth() + 1;
+                if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
+                    curMonth += (curYear - usrYear) * 12;
+                }
+                var diffMonths = curMonth - usrMonth;
+                if (new Date(t.date).getDate() > curDate.getDate())
+                    diffMonths--;
+                return t.categoryDescription === "Government" && t.Mode === "In" && diffMonths < 12;
+            });
+            amount = amount.sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); }).slice(0, 5).reverse();
             return amount.find(function (t) {
-                return (new Date(t.date)).getMonth() === curDate.getMonth() &&
-                    (new Date(t.date)).getFullYear() === curDate.getFullYear();
+                return Math.ceil(Math.abs(new Date().getTime() -
+                    new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2;
             }) ?
                 generqateInsightfe0(id, amount, lang) : null;
         case "147443c7-7be1-4f68-8ff3-ce65e992c22c":
@@ -258,15 +283,20 @@ exports.default = function (id, transactions, BankURL, lang) {
             return amount[0].length && amount[1].length ? generqateInsight372(id, amount, lang) : null;
         case "6b739292-bb50-4284-9d66-342de48403f2":
             var filterOutTansaction = common_1.groupBy(transactions.filter(function (t) {
-                return t.Mode === "Out" &&
-                    (new Date(t.date)).getMonth() === curDate.getMonth() &&
-                    (new Date(t.date)).getFullYear() === curDate.getFullYear();
+                var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
+                var curYear, curMonth = curDate.getMonth() + 1;
+                if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
+                    curMonth += (curYear - usrYear) * 12;
+                }
+                var diffMonths = curMonth - usrMonth;
+                return t.Mode === "Out" && diffMonths === 1;
             }), function (item) { return [item.categoryDescription]; });
             var sortedFilterOutTransactions = filterOutTansaction.map(function (tran) { return ({
                 category: tran[0].categoryDescription,
                 value: Math.abs(tran.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }))
             }); }).sort(function (a, b) { return a.value > b.value ? -1 : 1; });
-            return sortedFilterOutTransactions.length ? generqateInsight3f2(id, sortedFilterOutTransactions, lang) : null;
+            return sortedFilterOutTransactions.length && curDate.getDate() < 10 ?
+                generqateInsight3f2(id, sortedFilterOutTransactions, lang) : null;
         case "6b739292-bb50-4284-9d66-342de48403f2-b":
             var filterInTransaction = common_1.groupBy(transactions.filter(function (t) {
                 return t.Mode === "In" &&
@@ -282,201 +312,3 @@ exports.default = function (id, transactions, BankURL, lang) {
             break;
     }
 };
-// const generqateInsight3f2 = (id , transactions , lang) => {
-//     const curDate = new Date();
-//     return {
-//         ...generqateInsights(id) ,
-//         teaserTemplate: "pinChart" ,
-//         teaserBlocks: [
-//             ...teaserBlocks(id , lang , curDate) ,
-//             {
-//                 blockId: "chart" ,
-//                 type: "pin-chart" ,
-//                 class: "teaser-body" ,
-//                 direction: "vertical" ,
-//                 series: [transactions.map((amount: any) => ({
-//                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-//                     value: amount.amount
-//                 }))] ,
-//                 categories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
-//                 accessibilityCategories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month + 1]}`) ,
-//                 seriesLabels: transactions.map((amount: any) => `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}`)
-//             }
-//         ] ,
-//         score: 13 ,
-//         category1: "" ,
-//         category2: "" ,
-//         category3: "" ,
-//     };
-// }
-//
-// const generqateInsightea7 = (id , transactions , lang) => {
-//     const curDate = new Date();
-//     return {
-//         ...generqateInsights(id) ,
-//         teaserTemplate: "verticalBar" ,
-//         teaserBlocks: [
-//             ...teaserBlocks(id , lang , curDate) ,
-//             {
-//                 blockId: "chart" ,
-//                 type: "bar-chart" ,
-//                 class: "teaser-body" ,
-//                 series: [
-//                     [
-//                         {
-//                             "value": 170.18
-//                         } ,
-//                         {
-//                             "value": 167.71
-//                         } ,
-//                         {
-//                             "value": 148.88999999999996
-//                         } ,
-//                         {
-//                             "value": 191.67
-//                         }
-//                     ]
-//                 ] ,
-//                 "direction": "vertical" ,
-//                 "categories": [
-//                     "Apr" ,
-//                     "May" ,
-//                     "Jun" ,
-//                     "Jul"
-//                 ] ,
-//                 "accessibilityCategories": [
-//                     "Apr" ,
-//                     "May"
-//                 ] ,
-//                 "seriesLabels": [
-//                     ""
-//                 ]
-//             }
-//         ] ,
-//         score: 21 ,
-//         category1: "" ,
-//         category2: "" ,
-//         category3: "" ,
-//     };
-// }
-//
-// const generqateInsight729 = (id , transactions , lang) => {
-//     const curDate = new Date();
-//     return {
-//         ...generqateInsights(id) ,
-//         teaserTemplate: "pinChart" ,
-//         teaserBlocks: [
-//             ...teaserBlocks(id , lang , curDate) ,
-//             {
-//                 blockId: "chart" ,
-//                 type: "pin-chart" ,
-//                 class: "teaser-body" ,
-//                 direction: "vertical" ,
-//                 series: [transactions.map((amount: any) => ({
-//                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-//                     value: amount.amount
-//                 }))] ,
-//                 categories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
-//                 accessibilityCategories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month + 1]}`) ,
-//                 seriesLabels: transactions.map((amount: any) => `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}`)
-//             }
-//         ] ,
-//         score: 13 ,
-//         category1: "" ,
-//         category2: "" ,
-//         category3: "" ,
-//     };
-// }
-// const generqateInsightfb4 = (id , transactions , lang) => {
-//     const curDate = new Date();
-//     return {
-//         ...generqateInsights(id) ,
-//         teaserTemplate: "pinChart" ,
-//         teaserBlocks: [
-//             ...teaserBlocks(id , lang , curDate) ,
-//             {
-//                 blockId: "chart" ,
-//                 type: "pin-chart" ,
-//                 class: "teaser-body" ,
-//                 direction: "vertical" ,
-//                 series: [transactions.map((amount: any) => ({
-//                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-//                     value: amount.amount
-//                 }))] ,
-//                 categories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
-//                 accessibilityCategories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month + 1]}`) ,
-//                 seriesLabels: transactions.map((amount: any) => `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}`)
-//             }
-//         ] ,
-//         score: 13 ,
-//         category1: "" ,
-//         category2: "" ,
-//         category3: "" ,
-//     };
-// }
-//
-// const generqateInsight7a5 = (id , transactions , lang) => {
-//     const curDate = new Date();
-//     return {
-//         ...generqateInsights(id) ,
-//         teaserTemplate: "pinChart" ,
-//         teaserBlocks: [
-//             ...teaserBlocks(id , lang , curDate) ,
-//             {
-//                 blockId: "chart" ,
-//                 type: "pin-chart" ,
-//                 class: "teaser-body" ,
-//                 direction: "vertical" ,
-//                 series: [transactions.map((amount: any) => ({
-//                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-//                     value: amount.amount
-//                 }))] ,
-//                 categories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
-//                 accessibilityCategories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month + 1]}`) ,
-//                 seriesLabels: transactions.map((amount: any) => `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}`)
-//             }
-//         ] ,
-//         score: 13 ,
-//         category1: "" ,
-//         category2: "" ,
-//         category3: "" ,
-//     };
-// }
-//
-// const generqateInsight393 = (id , transactions , lang) => {
-//     const curDate = new Date();
-//     return {
-//         ...generqateInsights(id) ,
-//         teaserTemplate: "pinChart" ,
-//         teaserBlocks: [
-//             ...teaserBlocks(id , lang , curDate) ,
-//             {
-//                 blockId: "chart" ,
-//                 type: "pin-chart" ,
-//                 class: "teaser-body" ,
-//                 direction: "vertical" ,
-//                 series: [transactions.map((amount: any) => ({
-//                     label: `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}` ,
-//                     value: amount.amount
-//                 }))] ,
-//                 categories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month - 1]}`) ,
-//                 accessibilityCategories: transactions.map((amount: any) =>
-//                     `${new Date(amount.date).getDate()} ${monthNames[lang][+amount.month + 1]}`) ,
-//                 seriesLabels: transactions.map((amount: any) => `${insightsMessages[lang][id]["sign"] + Math.round(+amount.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g , ",")}`)
-//             }
-//         ] ,
-//         score: 13 ,
-//         category1: "" ,
-//         category2: "" ,
-//         category3: "" ,
-//     };
-// }

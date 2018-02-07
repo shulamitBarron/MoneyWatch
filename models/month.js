@@ -4,8 +4,8 @@ exports.default = {
     he: ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני",
         "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"
     ],
-    en: ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+    en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ],
     ar: ["يناير", "فبراير", "مارس", "أبريل", "قد", "يونيو",
         "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"

@@ -1,4 +1,12 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var Tables_1 = require("../models/Tables");
 var common_1 = require("./common");
@@ -7,13 +15,13 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods) 
     if (accounts === void 0) { accounts = []; }
     if (seriesNames === void 0) { seriesNames = []; }
     if (periods === void 0) { periods = []; }
-    var table = Tables_1.default[t];
+    var table = __assign({}, Tables_1.default[t]);
     var maxDate;
     var curDate = new Date();
     switch (table.case) {
         case "transaction":
             maxDate = new Date(Math.max.apply(null, theTransactions.map(function (t) { return new Date(t.date); })));
-            var transaction_1 = theTransactions.filter(function (t) { return new Date(t.date).getDate() === maxDate.getDate(); });
+            var transaction_1 = theTransactions.filter(function (t) { return new Date(t.date).getTime() === maxDate.getTime(); });
             table.rows = [table.cols.map(function (col) { return transaction_1[0] && transaction_1[0][col] ? transaction_1[0][col] : null; })];
             break;
         case "transactions":
@@ -30,7 +38,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods) 
             break;
         case "account":
             maxDate = new Date(Math.max.apply(null, theTransactions.map(function (t) { return new Date(t.date); })));
-            var trans_1 = theTransactions.filter(function (t) { return new Date(t.date).getDate() === maxDate.getDate(); });
+            var trans_1 = theTransactions.filter(function (t) { return new Date(t.date).getTime() === maxDate.getTime(); });
             var account_1 = trans_1.length ? accounts.filter(function (a) { return a.number === trans_1[0].accountNumber; }) : null;
             table.rows = [table.cols.map(function (col) { return account_1[0] && account_1[0][col] ? account_1[0][col] : null; })];
             break;
