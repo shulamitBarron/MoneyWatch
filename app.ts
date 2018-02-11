@@ -5,7 +5,7 @@ import {updateRating, updateFeedback} from './controllers/ratings'
 
 const app = express();
 
-const port = 8090;
+const port = process.env.PORT || 8090;
 
 function  errorHandler(err, req, res, next) {
     res.status(500)
