@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var getInsights_1 = require("./controllers/getInsights");
 var ratings_1 = require("./controllers/ratings");
 var app = express();
-var port = 8090;
+var port = process.env.PORT || 8090;
 function errorHandler(err, req, res, next) {
     res.status(500);
     res.render('error', { error: err });
