@@ -115,6 +115,7 @@ exports.default = {
         case: "account",
         type: "PTable",
         cols: [
+            "accountNumber",
             "id",
             "name",
             "image",
@@ -142,6 +143,7 @@ exports.default = {
             "std"
         ],
         attributesTypes: [
+            "String",
             "String",
             "PText",
             "Undefined",
@@ -201,6 +203,34 @@ exports.default = {
             "String",
             "Undefined",
             "PText",
+            "PText",
+            "String"
+        ]
+    },
+    cashFlowTransactions: {
+        case: "transactions",
+        type: "PTable",
+        cols: [
+            "id",
+            "account",
+            "accountNumber",
+            "transaction",
+            "amount",
+            "date",
+            "month",
+            "mode",
+            "bizCategory",
+            "currencyCd"
+        ],
+        attributesTypes: [
+            "String",
+            "String",
+            "String",
+            "String",
+            "PAmount",
+            "PDate",
+            "PNumber",
+            "String",
             "PText",
             "String"
         ]
@@ -280,5 +310,46 @@ exports.default = {
         "attributesTypes": [
             "PNumber"
         ]
-    }
+    },
+    bizCategories: {
+        case: "bizCategories",
+        type: "PTable",
+        cols: [
+            "bizCategory"
+        ],
+        rows: [],
+        attributesTypes: [
+            "String"
+        ]
+    },
+    categoryGroup: {
+        "case": "categoryGroup",
+        "type": "PCategoryGroup",
+        "cols": [
+            "id",
+            "description"
+        ],
+        "rows": [],
+        "attributesTypes": [
+            "String",
+            "PText"
+        ]
+    },
+    quizRanges: {
+        "case": "quizRanges",
+        "type": "PTable",
+        "cols": [
+            "id",
+            "from",
+            "to",
+            "answer"
+        ],
+        "rows": [],
+        "attributesTypes": [
+            "PNumber",
+            "PNumber",
+            "PNumber",
+            "Undefined"
+        ]
+    },
 };

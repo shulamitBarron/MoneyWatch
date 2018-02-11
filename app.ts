@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import {getInsights, getInsightDetails} from './controllers/getInsights'
+import {updateRating, updateFeedback} from './controllers/ratings'
 
 const app = express();
 
@@ -24,3 +25,6 @@ app.listen(port,err => {
 
 app.post('/getInsightDetails',getInsightDetails);
 app.post('/getInsights', getInsights);
+app.post('/getInboxInsights', getInsights);
+app.post('/updateInsightRating', updateRating);
+app.post('/updateInsightFeedback', updateFeedback);

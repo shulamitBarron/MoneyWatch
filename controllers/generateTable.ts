@@ -1,7 +1,7 @@
 import tables from '../models/Tables';
 import {groupBy} from "./common";
 
-export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seriesNames = [] , periods = []) => {
+export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seriesNames = [] , periods = [] , selectedCategory = "") => {
     let table = {...tables[t]};
     let maxDate;
     const curDate = new Date();
@@ -62,7 +62,25 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
                 theTransactions[0].currencyCd]) : null))
             break;
         case "periods":
-            table.rows = periods.map(p=> [p]);
+            table.rows = periods.map(p => [p]);
+            break;
+        case "bizCategories":
+            theTransactions = theTransactions.map(t => t.categoryDescription.en);
+            const categoryDescriptions = theTransactions.filter((t , i) => theTransactions.indexOf(t) === i);
+            table.rows = categoryDescriptions.map(g => [g]);
+            break;
+        case "categoryGroup":
+            table.rows = [["CG10000" , {"en": selectedCategory}]];
+            break;
+        case "quizRanges":
+            const avg = Math.abs(theTransactions.map(t => +t.amount).reduce((a , b) => a + b) / periods.length);
+            let random = Math.floor(Math.random() * 2000) + avg - 2000;
+            random = random < 0 ? 0 : random;
+            const range = [];
+            for (let i = 0; i < 4; i++) {
+                range.push([i.toString() , (random + 500 * i).toString() , (random + 500 * (i + 1)).toString() , (avg > random + 500 * i && avg < random + 500 * (i + 1)).toString()])
+            }
+            table.rows = range;
             break;
         default:
             break;
@@ -71,4 +89,3 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
     delete table.case;
     return table;
 }
-

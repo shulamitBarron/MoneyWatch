@@ -10,11 +10,12 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Tables_1 = require("../models/Tables");
 var common_1 = require("./common");
-exports.default = function (t, theTransactions, accounts, seriesNames, periods) {
+exports.default = function (t, theTransactions, accounts, seriesNames, periods, selectedCategory) {
     if (theTransactions === void 0) { theTransactions = []; }
     if (accounts === void 0) { accounts = []; }
     if (seriesNames === void 0) { seriesNames = []; }
     if (periods === void 0) { periods = []; }
+    if (selectedCategory === void 0) { selectedCategory = ""; }
     var table = __assign({}, Tables_1.default[t]);
     var maxDate;
     var curDate = new Date();
@@ -77,6 +78,24 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods) 
             break;
         case "periods":
             table.rows = periods.map(function (p) { return [p]; });
+            break;
+        case "bizCategories":
+            theTransactions = theTransactions.map(function (t) { return t.categoryDescription.en; });
+            var categoryDescriptions = theTransactions.filter(function (t, i) { return theTransactions.indexOf(t) === i; });
+            table.rows = categoryDescriptions.map(function (g) { return [g]; });
+            break;
+        case "categoryGroup":
+            table.rows = [["CG10000", { "en": selectedCategory }]];
+            break;
+        case "quizRanges":
+            var avg = Math.abs(theTransactions.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }) / periods.length);
+            var random = Math.floor(Math.random() * 2000) + avg - 2000;
+            random = random < 0 ? 0 : random;
+            var range = [];
+            for (var i = 0; i < 4; i++) {
+                range.push([i.toString(), (random + 500 * i).toString(), (random + 500 * (i + 1)).toString(), (avg > random + 500 * i && avg < random + 500 * (i + 1)).toString()]);
+            }
+            table.rows = range;
             break;
         default:
             break;
