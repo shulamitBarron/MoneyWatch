@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(errorHandler);
 app.listen(port, function (err) {
     if (err) {
+
         return console.log('something bad happened', err);
     }
     console.log("server run on port " + port);
