@@ -1,6 +1,7 @@
 export const storyIdForInsightId = {
     "72154aa7-d6b9-4f8e-b40d-a292cd0c167f": "DuplicateTransactionCharge_UC9" ,
     "66b719da-5a83-433b-bd82-c8ed2ca1685c": "RecommendRDC_UC1" ,
+    "66b719da-5a83-433b-bd82-c8ed22222222": "OrderChecks_UC1" ,
     "0ebf81f1-273a-47b2-ae66-59fc50520da0": "NotifySalaryDeposit_UC1" ,
     "16052c32-574b-4a15-882e-0286e4d64fe0": "NotifyGovernmentDeposit_UC1" ,
     "147443c7-7be1-4f68-8ff3-ce65e992c22c": "IntroducePersonetics_UC1" ,
@@ -50,6 +51,11 @@ export const dialogsForStory = {
         "BT_ RecommendRDC_D11" ,
         "BT_ RecommendRDC_D12" ,
         "BT_ RecommendRDC_D13"
+    ] ,
+    "OrderChecks_UC1": [
+        "BT_ OrderChecks_D11" ,
+        "BT_ OrderChecks_D13" ,
+        "BT_OrderChecks_D14"
     ] ,
     "NotifySalaryDeposit_UC1": [
         "BT_NotifySalaryDeposit_D11" ,
@@ -478,6 +484,40 @@ export const blockForDialog = {
             "text": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt"
         }
     ] ,
+    "BT_ OrderChecks_D11": [
+        {
+            "type": "txt" ,
+            "txt": "TXT_D11_B1" ,
+            "class": "perso-H2" ,
+            "id": "block_0" ,
+            "text": "TXT_D11_B1"
+        }
+    ] ,
+    "BT_ OrderChecks_D12": [
+        {
+            "id": "block_1491130885876" ,
+            "type": "account-selector" ,
+            "options": [
+                {
+                    "type": "data" ,
+                    "src": "confirmedAccount" ,
+                    "text": "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText"
+                }
+            ] ,
+            "src": "confirmedAccount" ,
+            "var": "selectedAccount" ,
+            "showAll": false ,
+            "accountText": "RecommendRDC_UC1_BT_ RecommendRDC_D12_block_1491130885876_accountSelectorAccountText"
+        }
+    ] ,
+    "BT_ OrderChecks_D13": [
+        {
+            "id": "block_1491131804369" ,
+            "type": "txt" ,
+            "txt": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt" ,
+            "text": "RecommendRDC_UC1_BT_ RecommendRDC_D13_block_1491131804369_txt"
+        }
+    ] ,
     "BT_NotifySalaryDeposit_D11": [
         {
             "type": "txt" ,
@@ -505,6 +545,21 @@ export const blockForDialog = {
             "class": "perso-H4" ,
             "id": "block_0" ,
             "text": "recentPaycheckTxt"
+        } ,
+        {
+            "type": "tranList" ,
+            "class": "perso-txlist1" ,
+            "src": "transactions.sortBy('date','desc')" ,
+            "id": "block_1"
+        }
+    ] ,
+    "BT_OrderChecks_D14": [
+        {
+            "type": "txt" ,
+            "txt": "postedChecksTxt" ,
+            "class": "perso-H4" ,
+            "id": "block_0" ,
+            "text": "postedChecksTxt"
         } ,
         {
             "type": "tranList" ,
@@ -1271,6 +1326,15 @@ export const tablesForStory = {
         "accounts" ,
         "transactions"
     ] ,
+    "OrderChecks_UC1": [
+        "confirmedTransaction" ,
+        "confirmedAccount" ,
+        "seriesNames" ,
+        "periods" ,
+        "currentDate" ,
+        "accounts" ,
+        "transactions"
+    ] ,
     "NotifySalaryDeposit_UC1": [
         "confirmedTransaction" ,
         "seriesNames" ,
@@ -1342,5 +1406,3 @@ export const tablesForStory = {
         "transactions"
     ]
 }
-
-

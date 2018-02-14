@@ -281,6 +281,19 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
                 throw "error";
             }
             break;
+        case "66b719da-5a83-433b-bd82-c8ed22222222":
+            let orderChecks = transactions.filter(t => t.type === 'OrderChecks').sort((a , b) => -1 * a.date.getTime() - b.date.getTime());
+            orderChecks = orderChecks.length ? orderChecks[0] : null;
+            theTransactions = orderChecks ? transactions.filter(t => t.type === 'PostedCheck' && t.date.getTime() > orderChecks.date.getTime()) : [];
+            theAccounts = accounts.filter(account =>
+                theTransactions.filter(t => t.accountNumber === account.number).length > 0);
+            if (theTransactions.length && theAccounts.length) {
+                tablesForStory[storyIdForInsightId[storyId]].map(table =>
+                    facts[table] = generateTble(table , theTransactions , theAccounts , [["In"] , ["Out"]] , periods , '' , orderChecks));
+            } else {
+                throw "error";
+            }
+            break;
         default:
             break;
     }

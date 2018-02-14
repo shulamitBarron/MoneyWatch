@@ -309,6 +309,22 @@ exports.generateFacts = function (storyId, transactions, accounts) {
                 throw "error";
             }
             break;
+        case "66b719da-5a83-433b-bd82-c8ed22222222":
+            var orderChecks_1 = transactions.filter(function (t) { return t.type === 'OrderChecks'; }).sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); });
+            orderChecks_1 = orderChecks_1.length ? orderChecks_1[0] : null;
+            theTransactions = orderChecks_1 ? transactions.filter(function (t) { return t.type === 'PostedCheck' && t.date.getTime() > orderChecks_1.date.getTime(); }) : [];
+            theAccounts = accounts.filter(function (account) {
+                return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
+            });
+            if (theTransactions.length && theAccounts.length) {
+                insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
+                    return facts[table] = generateTable_1.default(table, theTransactions, theAccounts, [["In"], ["Out"]], periods, '', orderChecks_1);
+                });
+            }
+            else {
+                throw "error";
+            }
+            break;
         default:
             break;
     }

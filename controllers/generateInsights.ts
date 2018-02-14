@@ -364,7 +364,7 @@ const generqateInsight34c = (id: any , transactions: any , lang: any) => {
     };
 }
 
-function generqateInsight7a5(id: any ,categoryDescription,  lang: any) {
+function generqateInsight7a5(id: any , categoryDescription , lang: any) {
     const curDate = new Date();
     const teaser = teaserBlocks(id , lang , curDate);
     teaser[2].text = teaser[2].text.replace("{{categoryDescription}}" , categoryDescription);
@@ -385,6 +385,27 @@ function generqateInsight7a5(id: any ,categoryDescription,  lang: any) {
         category1: "" ,
         category2: "" ,
         category3: "" ,
+    };
+}
+
+const generqateInsight222 = (id , transactions , lang) => {
+    const curDate = new Date();
+    return {
+        ...generqateInsights(id) ,
+        teaserTemplate: "image" ,
+        teaserBlocks: [
+            ...teaserBlocks(id , lang , curDate) ,
+            {
+                blockId: "main-image" ,
+                type: "image" ,
+                url: insightsMessages[lang][id]["main-image"] ,
+                alt: "Mobile Banking"
+            }
+        ] ,
+        score: 26.0 ,
+        category1: "Information" ,
+        category2: "Spending" ,
+        category3: "money_in" ,
     };
 }
 
@@ -549,7 +570,7 @@ export default (id , transactions: any , lang , messages) => {
             const peri = [2 , 3 , 4];
             theTransactions = theTransactions.map(theTransaction => ({
                 theTransactions: theTransaction ,
-                categoryDescription:theTransaction[0][0].categoryDescription,
+                categoryDescription: theTransaction[0][0].categoryDescription ,
                 avg: peri.map(p => {
                     var trans = theTransaction.filter(theTransactions_0 => {
                         const curDate = new Date();
@@ -586,9 +607,15 @@ export default (id , transactions: any , lang , messages) => {
                     avg: tt.avg
                 }
             });
-            theTransactions = theTransactions.sort((a,b)=>a.Difference -b.Difference );
+            theTransactions = theTransactions.sort((a , b) => a.Difference - b.Difference);
             return theTransactions.length && curDate.getDate() < 20 ?
-                generqateInsight7a5(id ,theTransactions[0].categoryDescription, lang) : null;
+                generqateInsight7a5(id , theTransactions[0].categoryDescription , lang) : null;
+        case "66b719da-5a83-433b-bd82-c8ed22222222":
+            let orderChecks = transactions.filter(t => t.type === 'OrderChecks').sort((a , b) => -1 * a.date.getTime() - b.date.getTime());
+            orderChecks = orderChecks.length ? orderChecks[0] : null;
+            theTransactions = orderChecks? transactions.filter(t=> t.type === 'PostedCheck' && t.date.getTime() > orderChecks.date.getTime()): [];
+            return theTransactions.length > 20 ?
+                generqateInsight222(id , theTransactions , lang) : null;
         default:
             break;
     }

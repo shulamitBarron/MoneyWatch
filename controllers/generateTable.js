@@ -10,19 +10,20 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Tables_1 = require("../models/Tables");
 var common_1 = require("./common");
-exports.default = function (t, theTransactions, accounts, seriesNames, periods, selectedCategory) {
+exports.default = function (t, theTransactions, accounts, seriesNames, periods, selectedCategory, confirmedTransaction) {
     if (theTransactions === void 0) { theTransactions = []; }
     if (accounts === void 0) { accounts = []; }
     if (seriesNames === void 0) { seriesNames = []; }
     if (periods === void 0) { periods = []; }
     if (selectedCategory === void 0) { selectedCategory = ""; }
+    if (confirmedTransaction === void 0) { confirmedTransaction = null; }
     var table = __assign({}, Tables_1.default[t]);
     var maxDate;
     var curDate = new Date();
     switch (table.case) {
         case "transaction":
             maxDate = new Date(Math.max.apply(null, theTransactions.map(function (t) { return new Date(t.date); })));
-            var transaction_1 = theTransactions.filter(function (t) { return new Date(t.date).getTime() === maxDate.getTime(); });
+            var transaction_1 = confirmedTransaction ? [confirmedTransaction] : theTransactions.filter(function (t) { return new Date(t.date).getTime() === maxDate.getTime(); });
             table.rows = [table.cols.map(function (col) { return transaction_1[0] && transaction_1[0][col] ? transaction_1[0][col] : null; })];
             break;
         case "transactions":

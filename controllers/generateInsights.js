@@ -278,6 +278,17 @@ function generqateInsight7a5(id, categoryDescription, lang) {
             }
         ]), score: 7, category1: "", category2: "", category3: "" });
 }
+var generqateInsight222 = function (id, transactions, lang) {
+    var curDate = new Date();
+    return __assign({}, generqateInsights(id), { teaserTemplate: "image", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
+            {
+                blockId: "main-image",
+                type: "image",
+                url: insightsMessages[lang][id]["main-image"],
+                alt: "Mobile Banking"
+            }
+        ]), score: 26.0, category1: "Information", category2: "Spending", category3: "money_in" });
+};
 exports.default = function (id, transactions, lang, messages) {
     insightsMessages = messages;
     var amount;
@@ -477,6 +488,12 @@ exports.default = function (id, transactions, lang, messages) {
             theTransactions = theTransactions.sort(function (a, b) { return a.Difference - b.Difference; });
             return theTransactions.length && curDate.getDate() < 20 ?
                 generqateInsight7a5(id, theTransactions[0].categoryDescription, lang) : null;
+        case "66b719da-5a83-433b-bd82-c8ed22222222":
+            var orderChecks_1 = transactions.filter(function (t) { return t.type === 'OrderChecks'; }).sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); });
+            orderChecks_1 = orderChecks_1.length ? orderChecks_1[0] : null;
+            theTransactions = orderChecks_1 ? transactions.filter(function (t) { return t.type === 'PostedCheck' && t.date.getTime() > orderChecks_1.date.getTime(); }) : [];
+            return theTransactions.length > 20 ?
+                generqateInsight222(id, theTransactions, lang) : null;
         default:
             break;
     }

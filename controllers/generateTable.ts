@@ -1,14 +1,14 @@
 import tables from '../models/Tables';
 import {groupBy} from "./common";
 
-export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seriesNames = [] , periods = [] , selectedCategory = "") => {
+export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seriesNames = [] , periods = [] , selectedCategory = "" , confirmedTransaction = null) => {
     let table = {...tables[t]};
     let maxDate;
     const curDate = new Date();
     switch (table.case) {
         case "transaction":
             maxDate = new Date(Math.max.apply(null , theTransactions.map(t => new Date(t.date))));
-            const transaction = theTransactions.filter(t => new Date(t.date).getTime() === maxDate.getTime());
+            const transaction = confirmedTransaction ? [confirmedTransaction] : theTransactions.filter(t => new Date(t.date).getTime() === maxDate.getTime());
             table.rows = [table.cols.map(col => transaction[0] && transaction[0][col] ? transaction[0][col] : null)];
             break;
         case "transactions":
