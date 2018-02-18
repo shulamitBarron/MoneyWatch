@@ -10,7 +10,7 @@ exports.default = {
     ar: ["يناير", "فبراير", "مارس", "أبريل", "قد", "يونيو",
         "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
     ],
-    fr: ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun",
-            "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc"
+    fr: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jun",
+            "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"
     ]
 };
