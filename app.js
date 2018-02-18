@@ -19,6 +19,7 @@ app.listen(port, function (err) {
     }
     console.log("server run on port " + port);
 });
+
 app.post('/getInsightDetails', getInsights_1.getInsightDetails);
 app.post('/getInsights', getInsights_1.getInsights);
 app.post('/getInboxInsights', getInsights_1.getInsights);
