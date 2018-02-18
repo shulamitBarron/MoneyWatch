@@ -549,8 +549,8 @@ export default (id , transactions: any , lang , messages) => {
                 })
             ).length);
             amount.sort((a , b) => b.length - a.length);
-            amount[0].sort((a , b) =>  a.date.getTime() - b.date.getTime());
-            return amount.length ?
+            amount[0] = amount[0]? amount[0].sort((a , b) => a.date.getTime() - b.date.getTime()): amount[0];
+            return amount[0] && amount[0].length ?
                 generqateInsight34c(id , amount[0] , lang) : null;
         case "7221df03-f2e3-421e-8667-eea0c6b7c7a5":
             let theTransactions = groupBy(transactions.filter(t => t.Mode === "Out") , item => [item.categoryDescription]);
