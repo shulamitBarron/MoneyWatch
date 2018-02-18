@@ -225,7 +225,7 @@ var generqateInsight393 = function (id, length, reduce, lang) {
             {
                 blockId: "box-value2",
                 type: "txt",
-                text: "\u20AA" + Math.abs(Math.abs(reduce))
+                text: "\u20AA" + Math.abs(Math.floor(reduce))
             }
         ]), score: 7, category1: "Information", category2: "", category3: "" });
 };
