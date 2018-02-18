@@ -330,10 +330,7 @@ exports.default = function (id, transactions, lang, messages) {
                 return t.categoryDescription === "Salary" && t.Mode === "In" && diffMonths < 12;
             });
             amount = amount.sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); }).slice(0, 5).reverse();
-            return amount.find(function (t) {
-                return Math.ceil(Math.abs(new Date().getTime() -
-                    new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4;
-            }) ?
+            return amount.length ?
                 generqateInsightda0(id, amount, lang) : null;
         case "16052c32-574b-4a15-882e-0286e4d64fe0":
             amount = transactions.filter(function (t) {
