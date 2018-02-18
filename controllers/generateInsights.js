@@ -413,7 +413,7 @@ exports.default = function (id, transactions, lang, messages) {
                 generqateInsight393(id, amount.length, amount.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }), lang) : null;
         case "b6b765af-0378-4413-a4f3-aa83d816d586":
             amount = transactions;
-            return amount.length && curDate.getDate() % 3 === 2 ?
+            return amount.length && curDate.getDate() % 3 <=1?
                 generqateInsight586(id, amount, lang) : null;
         case "22741535-e6d1-4aa3-93de-a021efb8f34c":
             amount = transactions.filter(function (t) { return t.mode === "Out" && (new Date(t.date)).getDate() === (new Date()).getDate(); });
