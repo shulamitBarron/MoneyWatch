@@ -89,7 +89,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods, 
             table.rows = [["CG10000", { "en": selectedCategory }]];
             break;
         case "quizRanges":
-            var avg = Math.abs(theTransactions.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }) / periods.length);
+            var avg = theTransactions.length ? Math.abs(theTransactions.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }) / periods.length) : 0;
             var random = Math.floor(Math.random() * 2000) + avg - 2000;
             random = random < 0 ? 0 : random;
             var range = [];
