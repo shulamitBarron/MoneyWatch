@@ -20,7 +20,6 @@ export const storyIdForInsightId = {
 export const dialogsForStory = {
     "SumSpendingCategory_UC3": [
         "BT_SumSpendingCategory_D81",
-        "BT_SumSpendingCategory_D80",
         "BT_SumSpendingCategory_D91",
         "BT_SumSpendingCategory_D91-b",
         "BT_SumSpendingCategory_D30"
