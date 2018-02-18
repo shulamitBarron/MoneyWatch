@@ -429,8 +429,8 @@ exports.default = function (id, transactions, lang, messages) {
                 return diffMonths === pp;
             }); }).length; });
             amount.sort(function (a, b) { return b.length - a.length; });
-            amount[0].sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
-            return amount.length ?
+            amount[0] = amount[0] ? amount[0].sort(function (a, b) { return a.date.getTime() - b.date.getTime(); }) : amount[0];
+            return amount[0] && amount[0].length ?
                 generqateInsight34c(id, amount[0], lang) : null;
         case "7221df03-f2e3-421e-8667-eea0c6b7c7a5":
             var theTransactions = common_1.groupBy(transactions.filter(function (t) { return t.Mode === "Out"; }), function (item) { return [item.categoryDescription]; });
