@@ -429,7 +429,7 @@ exports.default = function (id, transactions, lang, messages) {
             amount[0] = amount[0] ? amount[0].sort(function (a, b) { return a.date.getTime() - b.date.getTime(); }) : amount[0];
             return amount[0] && amount[0].length ?
                 generqateInsight34c(id, amount[0], lang) : null;
-        case "7221df03-f2e3-421e-8667-eea0c6b7c7a5":
+                case "7221df03-f2e3-421e-8667-eea0c6b7c7a5":
             var theTransactions = common_1.groupBy(transactions.filter(function (t) { return t.Mode === "Out"; }), function (item) { return [item.categoryDescription]; });
             theTransactions = theTransactions.map(function (t) { return common_1.groupBy(t, function (item) {
                 return [(new Date(item.date)).getMonth(), (new Date(item.date)).getFullYear()];
@@ -446,7 +446,7 @@ exports.default = function (id, transactions, lang, messages) {
                 return diffMonths && diffMonths < 4;
             }); });
             var peri_1 = [2, 3, 4];
-            theTransactions = theTransactions.map(function (theTransaction) { return ({
+            theTransactions = theTransactions.map(function (theTransaction) { return theTransaction.length && theTransaction[0][0] ? ({
                 theTransactions: theTransaction,
                 categoryDescription: theTransaction[0][0].categoryDescription,
                 avg: peri_1.map(function (p) {
@@ -463,9 +463,9 @@ exports.default = function (id, transactions, lang, messages) {
                     });
                     return trans.length ? trans[0].map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }) : 0;
                 }).reduce(function (a, b) { return a + b; }) / peri_1.length
-            }); });
+            }) : theTransaction; });
             theTransactions = theTransactions.map(function (tt) {
-                var lastTr = tt.theTransactions.filter(function (theTransactions_0) {
+                var lastTr = tt.theTransactions? tt.theTransactions.filter(function (theTransactions_0) {
                     var curDate = new Date();
                     var t = theTransactions_0[0];
                     var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
@@ -475,7 +475,7 @@ exports.default = function (id, transactions, lang, messages) {
                     }
                     var diffMonths = curMonth - usrMonth;
                     return diffMonths === 1;
-                });
+                }): [];
                 return {
                     sum: lastTr.length ? lastTr[0].map(function (a) { return +a.amount; }).reduce(function (a, b) { return a + b; }) : 0,
                     categoryDescription: tt.categoryDescription,
