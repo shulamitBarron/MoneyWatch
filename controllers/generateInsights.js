@@ -412,7 +412,7 @@ exports.default = function (id, transactions, lang, messages) {
             amount = transactions;
             return amount.length && curDate.getDate() % 3 <=1?
                 generqateInsight586(id, amount, lang) : null;
-        case "22741535-e6d1-4aa3-93de-a021efb8f34c":
+                case "22741535-e6d1-4aa3-93de-a021efb8f34c":
             amount = transactions.filter(function (t) { return t.mode === "Out" && (new Date(t.date)).getDate() === (new Date()).getDate(); });
             amount = common_1.groupBy(amount, function (item) { return [item.transaction]; });
             var periods_1 = [1, 2, 3];
